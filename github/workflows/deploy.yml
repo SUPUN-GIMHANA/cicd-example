@@ -1,0 +1,24 @@
+name: Deploy Portfolio to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action on pushing to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on PRs to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./  # The directory to publish, set to root for simple static files
+        target_branch: gh-pages  # Deploy to the gh-pages branch
